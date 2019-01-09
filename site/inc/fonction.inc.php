@@ -17,3 +17,12 @@ function debug($d, $mode =1){
     }
     echo"</div>";
 }
+
+function internauteEstConnecte(){
+    if(!isset($_SESSION['membre'])) return false;
+    else return true;
+}
+function internauteEstConnecteEtEstAdmin(){
+    if(internauteEstConnecte() && $_SESSION['membre']['status'] ==1) return true;
+    else return false;
+}
