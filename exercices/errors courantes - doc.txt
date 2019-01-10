@@ -1,0 +1,23 @@
+=========================
+= Les erreurs courantes =
+=========================
+
+parse error:
+------------
+
+- il manque un point-virgule, une gullemet, quote, parenthese, accolade mal fermee.
+- probleme de concatenation
+
+Undefined function:
+-------------------
+
+la function que vous essaye d'appeler n'existe pas.
+- Soit la function n'existe vraiment pas.
+- Soit une faute de frappe
+
+Wrong parameter count:
+----------------------
+
+Vous avez oublie des parametres pour la function
+- function appeler($para.=m1, $param2, param3);
+- appeler(param1, param2) -> error
