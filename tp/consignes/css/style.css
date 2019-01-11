@@ -1,0 +1,23 @@
+body{
+    background-color: #a9f0d1;
+}
+
+.bg{
+    background-image: url('../img/bg.jpg');
+    border-radius: 5px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 2%;
+    
+ 
+    
+}
+footer{
+    text-align: right;
+    color: #6c9986;
+
+}
+header{
+    color: #6c9986
+;
+}
