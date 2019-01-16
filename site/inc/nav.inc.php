@@ -1,6 +1,5 @@
-<?php require_once "init.inc.php" ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <?php if (internauteEstConnecteEtEstAdmin()) : ?>
+    <?php if (adminConnected()) : ?>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
         aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -28,7 +27,7 @@
             </li>
         </ul>
     </div>
-    <?php elseif (internauteEstConnecte()) : ?>
+    <?php elseif (userConnected()) : ?>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
         aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

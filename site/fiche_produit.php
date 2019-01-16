@@ -1,45 +1,47 @@
 <?php
-require_once "inc/init.inc.php";
-require_once "inc/haut.inc.php";
-$res = executeRequete("SELECT * FROM produit where id_produit= '$_GET[id_produit]'");
-if($res->rowCount()) {
+require_once('inc/init.inc.php');
 
 
-while($r = $res->fetch()) {
-    echo 
-     "Titre :" .$r['titre']."<br><img src='".$r['photo']."'width=200><br>".
-     "Desctiption : ".$r['description'].
-    "<br>"."PRIX :".$r['prix']."€ <br>"; 
-    echo   
-    "il ne reste plus que ". $r['stock']." article.";
-    echo
-    "<a href='?action=rev'>revenir à la boutique</a>";
-    
+$resultat = executeRequete("SELECT * FROM produit WHERE id_produit = '$_GET[id_produit]'");
+
+if($resultat->rowCount() <= 0) { header('location:boutique.php'); exit();}
+
+
+$produit = $resultat->fetch(PDO::FETCH_ASSOC);
+$content .= "<h2>" . $produit['titre'] . "</h2>";
+$content .= "<p>Catégorie : " . $produit['categorie'] . "</p>";
+$content .= "<p>Taille : " . $produit['taille'] . "</p>";
+$content .= "<p>Couleur : " . $produit['couleur'] . "</p>";
+$content .= '<p><img src="' . $produit['photo'] . '" width="70" height="70">' . "</p>";
+$content .= "<p><i>Description : " . $produit['description'] . "</i></p>";
+
+if($produit['stock'] > 0){
+	$content .= "<p><i>Nombre produit disponible : " . $produit['stock'] . "</i></p>";
+	$content .= "<form method='post' action='panier.php'>";
+	$content .= '<input type="hidden" name="id_produit" value="'.$produit['id_produit'].'">';
+	$content .= "<label for='quantite'>Quantite : </label>";
+	$content .= '<select id="quantite" name="quantite">';
+	$quantite = $produit['stock'];
+	for($i = 1; $i <= $quantite; $i++)
+	{
+		$content .= "<option>" . $i . "</option>";
+	}
+	$content .= "</select>";
+	$content .= "<input type='submit' name='ajouter_panier' value='Ajouter au panier'><br>";
+	$content .= "</form>";
+} else {
+	$content .= "Rupture de stock !";
 }
 
-}
-if(isset($_GET['action']) && $_GET['action']=='rev'){
-        echo "dfdifgsmfé";
-        header('location: boutique.php');
-    }
+$content .= '<a href="boutique.php?categorie='.$produit['categorie'].'">Retour vers la séléction de ' . $produit['categorie'] .'</a>';
 
-    echo '
-    
-    <select>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-    <button type="button" class="btn btn-primary">ajouter au panier</button>'
- 
 
-    
 
-  
-?>
-<?php
-  require_once 'inc/bas.inc.php';
-  ?>
+require_once('inc/haut.inc.php');
+
+echo $content;
+
+require_once('inc/bas.inc.php');
+
+
 

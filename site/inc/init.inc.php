@@ -1,19 +1,20 @@
 <?php
+//conexion à la BDD
+try{
+	$bdd = new PDO('mysql:host=localhost;dbname=site;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+}catch(Exeption $e){
+	die('Erreur : ' . $e->getMessage());
+};
 
-try {
-    $bdd = new PDO("mysql:host=localhost;dbname=site;charset=utf8", 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-} catch (Exception $e) {
-    die('Error : ' . $e->getMessage());
-}
-
+//session
 session_start();
 
-
 //chemin
-define("RACINE_SITE","/supports_poissy/php/site/");
+define("RACINE_SITE", "/supports_poissy/php/site/");
+
 //variable content
-$content="";
+$content ="";
 
-require_once('fonction.inc.php');
-
+//autres fichier d'inclusions
+require_once("fonction.inc.php");
 ?>
